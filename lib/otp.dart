@@ -37,6 +37,7 @@ class _otpState extends State<otp> {
     setState(() => loading = false);
   }
 
+  String code = "";
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -63,7 +64,7 @@ class _otpState extends State<otp> {
         color: Color.fromRGBO(234, 239, 243, 1),
       ),
     );
-    var code = "";
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -159,7 +160,7 @@ class _otpState extends State<otp> {
                           color: Colors.white,
                         ),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.brown.shade400,
+                      primary: Color.fromARGB(255, 18, 94, 106),
                       textStyle: TextStyle(fontSize: 18, color: Colors.white),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
@@ -169,36 +170,7 @@ class _otpState extends State<otp> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                      onPressed: () async {
-                        setState(() {
-                          loading = true;
-                        });
-                        // Create a PhoneAuthCredential with the code
-                        try {
-                          var phone;
-                          PhoneAuthCredential credential =
-                              PhoneAuthProvider.credential(
-                                  verificationId: widget.verifyid,
-                                  smsCode: code);
-
-                          // Sign the user in (or link) with the credential
-                          await auth.signInWithCredential(credential);
-                          print("otp verified");
-                          setState(() {
-                            loading = false;
-                          });
-                          Helper.saveLoginStatus(true);
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) => home()));
-                        } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("${e.toString()}"),
-                          ));
-                          setState(() {
-                            loading = false;
-                          });
-                        }
-                      },
+                      onPressed: () {},
                       child: Text(
                         "Resend OTP",
                         style: TextStyle(color: Colors.blue, fontSize: 16),

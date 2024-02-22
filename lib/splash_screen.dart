@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/Helper.dart';
 import 'package:my_app/home.dart';
@@ -46,11 +47,13 @@ class _splash_screenState extends State<splash_screen> {
               height: size.height * 0.35,
               width: size.width * 0.7,
             ),
-            Text(
-              'Welcome to Webs Proud!',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+            FadeInUp(
+              child: Text(
+                'Welcome to Webs Proud!',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],

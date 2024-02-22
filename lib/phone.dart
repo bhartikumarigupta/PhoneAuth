@@ -147,7 +147,7 @@ class _phoneState extends State<phone> {
                           color: Colors.white,
                         ),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.brown.shade400,
+                      primary: Color.fromARGB(255, 18, 94, 106),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),

@@ -38,6 +38,8 @@ dependencies:
   pinput: ^4.0.0
   firebase_core: ^2.25.4
   shared_preferences: ^2.2.2
+  animated_text_kit: ^4.2.2
+  animate_do: ^3.3.3
 
 dev_dependencies:
   flutter_test:

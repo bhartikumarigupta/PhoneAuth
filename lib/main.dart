@@ -8,19 +8,19 @@ void main() async {
   Platform.isAndroid
       ? await Firebase.initializeApp(
           options: const FirebaseOptions(
-          appId: '1:996266412497:android:27edd169f775029c00b8f0',
-          messagingSenderId: '996266412497',
-          projectId: 'phone-79a5a',
-          apiKey: 'AIzaSyBCa30AIzt5inZ4tV-_NFKsRU8WtE8awmU',
+          appId: '1:899062623224:android:cb3604a7d7ddae5b05040d',
+          messagingSenderId: '899062623224',
+          projectId: 'phoneauth-edf50',
+          apiKey: 'AIzaSyDLJC0_K07JuLTcyyzupcIp5CBJnhwjPKw',
           // databaseURL: 'https://flutterfire-cd2f7.firebaseio.com',
         ))
       : await Firebase.initializeApp();
 
-  runApp(const myapp());
+  runApp(const MyApp());
 }
 
-class myapp extends StatelessWidget {
-  const myapp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
