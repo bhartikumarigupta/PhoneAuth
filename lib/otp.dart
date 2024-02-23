@@ -133,25 +133,21 @@ class _otpState extends State<otp> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
-                    try {
-                      PhoneAuthCredential credential =
-                          PhoneAuthProvider.credential(
-                              verificationId: widget.verifyid, smsCode: code);
-                      print("Credential: $credential");
-                      // Sign the user in (or link) with the credential
-                      print(widget.verifyid);
-
-                      await signInWithPhoneAuthCredential(credential);
-                      print("otp verified");
-                    } catch (e) {
+                    if (code.length != 6) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("${e.toString()}"),
+                        content: Text("Please enter valid OTP"),
                       ));
-                      print(e.toString());
-                      setState(() {
-                        loading = false;
-                      });
+                      return;
                     }
+                    PhoneAuthCredential credential =
+                        PhoneAuthProvider.credential(
+                            verificationId: widget.verifyid, smsCode: code);
+                    print("Credential: $credential");
+                    // Sign the user in (or link) with the credential
+                    print(widget.verifyid);
+
+                    await signInWithPhoneAuthCredential(credential);
+                    print("otp verified");
                   },
                   child: loading == false
                       ? Text("get started",
@@ -170,7 +166,52 @@ class _otpState extends State<otp> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        setState(() {
+                          loading = true;
+                        });
+                        await FirebaseAuth.instance.verifyPhoneNumber(
+                          phoneNumber: '+91 ${widget.Number}',
+                          verificationCompleted:
+                              (PhoneAuthCredential credential) {
+                            print("verification completed");
+                          },
+                          verificationFailed: (FirebaseAuthException e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Text("verification failed ${e.toString()}"),
+                              ),
+                            );
+
+                            setState(() {
+                              loading = false;
+                            });
+                          },
+                          codeSent: (String verificationId, int? resendToken) {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => otp(
+                            //               verifyid: verificationId,
+                            //               Number: widget.Number,
+                            //             )));
+
+                            loading = false;
+                            setState(() {});
+                          },
+                          codeAutoRetrievalTimeout: (String verificationId) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Time out Try again!"),
+                              ),
+                            );
+                            setState(() {
+                              loading = false;
+                            });
+                          },
+                        );
+                      },
                       child: Text(
                         "Resend OTP",
                         style: TextStyle(color: Colors.blue, fontSize: 16),

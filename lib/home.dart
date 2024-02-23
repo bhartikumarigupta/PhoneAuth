@@ -16,9 +16,13 @@ class home extends StatelessWidget {
           title: Center(
             child: const Text(
               'Webs Proud Technologies',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 20),
             ),
           ),
+          leading: null,
           backgroundColor: Color.fromARGB(255, 18, 94, 106)),
       body: Container(
         color: Color.fromARGB(255, 18, 94, 106),
@@ -42,7 +46,7 @@ class home extends StatelessWidget {
                 child: Text(
                   'Welcome to home Screen',
                   style: TextStyle(
-                    // color: Colors.white,
+                    color: Colors.white,
                     fontSize: 24,
                     fontWeight: FontWeight.w400,
                   ),
